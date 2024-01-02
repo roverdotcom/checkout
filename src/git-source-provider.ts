@@ -21,8 +21,9 @@ export async function getSource(settings: IGitSourceSettings): Promise<void> {
   const repositoryUrl = urlHelper.getFetchUrl(settings)
 
   core.info('Updating mirror')
-  await exec.exec(`cd ${settings.mirror} && git remote update`);
-
+  await exec.exec('/usr/bin/git', ['remote', 'update'], {
+    cwd: settings.mirror
+  })
 
   // Remove conflicting file path
   if (fsHelper.fileExistsSync(settings.repositoryPath)) {
