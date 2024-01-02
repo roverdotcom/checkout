@@ -1140,6 +1140,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.cleanup = exports.getSource = void 0;
 const core = __importStar(__nccwpck_require__(2186));
+const exec = __importStar(__nccwpck_require__(1514));
 const fsHelper = __importStar(__nccwpck_require__(7219));
 const gitAuthHelper = __importStar(__nccwpck_require__(2565));
 const gitCommandManager = __importStar(__nccwpck_require__(738));
@@ -1155,6 +1156,8 @@ function getSource(settings) {
         // Repository URL
         core.info(`Syncing repository: ${settings.repositoryOwner}/${settings.repositoryName}`);
         const repositoryUrl = urlHelper.getFetchUrl(settings);
+        core.info('Updating mirror');
+        yield exec.exec(`cd ${settings.mirror} && git remote update`);
         // Remove conflicting file path
         if (fsHelper.fileExistsSync(settings.repositoryPath)) {
             yield io.rmRF(settings.repositoryPath);

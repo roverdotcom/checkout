@@ -1,4 +1,5 @@
 import * as core from '@actions/core'
+import * as exec from '@actions/exec'
 import * as fsHelper from './fs-helper'
 import * as gitAuthHelper from './git-auth-helper'
 import * as gitCommandManager from './git-command-manager'
@@ -9,8 +10,8 @@ import * as path from 'path'
 import * as refHelper from './ref-helper'
 import * as stateHelper from './state-helper'
 import * as urlHelper from './url-helper'
-import {IGitCommandManager} from './git-command-manager'
-import {IGitSourceSettings} from './git-source-settings'
+import { IGitCommandManager } from './git-command-manager'
+import { IGitSourceSettings } from './git-source-settings'
 
 export async function getSource(settings: IGitSourceSettings): Promise<void> {
   // Repository URL
@@ -18,6 +19,10 @@ export async function getSource(settings: IGitSourceSettings): Promise<void> {
     `Syncing repository: ${settings.repositoryOwner}/${settings.repositoryName}`
   )
   const repositoryUrl = urlHelper.getFetchUrl(settings)
+
+  core.info('Updating mirror')
+  await exec.exec(`cd ${settings.mirror} && git remote update`);
+
 
   // Remove conflicting file path
   if (fsHelper.fileExistsSync(settings.repositoryPath)) {
