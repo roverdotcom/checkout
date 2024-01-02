@@ -1790,6 +1790,7 @@ function getInputs() {
         // Determine the GitHub URL that the repository is being hosted from
         result.githubServerUrl = core.getInput('github-server-url');
         core.debug(`GitHub Host URL = ${result.githubServerUrl}`);
+        result.mirror = core.getInput('mirror');
         return result;
     });
 }
@@ -2385,7 +2386,7 @@ function getFetchUrl(settings) {
     }
     // "origin" is SCHEME://HOSTNAME[:PORT]
     // return `${serviceUrl.origin}/${encodedOwner}/${encodedName}`
-    return `file:///${settings.repositoryName}`;
+    return `file:///${settings.mirror}`;
 }
 exports.getFetchUrl = getFetchUrl;
 function getServerUrl(url) {

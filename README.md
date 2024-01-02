@@ -121,6 +121,9 @@ Please refer to the [release page](https://github.com/actions/checkout/releases/
     # running from unless specified. Example URLs are https://github.com or
     # https://my-ghes-server.example.com
     github-server-url: ''
+
+    # Testing mirror
+    mirror: ''
 ```
 <!-- end usage -->
 

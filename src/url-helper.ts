@@ -17,7 +17,7 @@ export function getFetchUrl(settings: IGitSourceSettings): string {
 
   // "origin" is SCHEME://HOSTNAME[:PORT]
   // return `${serviceUrl.origin}/${encodedOwner}/${encodedName}`
-  return `file:///${settings.repositoryName}`
+  return `file:///${settings.mirror}`
 }
 
 export function getServerUrl(url?: string): URL {

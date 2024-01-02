@@ -3,7 +3,7 @@ import * as fsHelper from './fs-helper'
 import * as github from '@actions/github'
 import * as path from 'path'
 import * as workflowContextHelper from './workflow-context-helper'
-import {IGitSourceSettings} from './git-source-settings'
+import { IGitSourceSettings } from './git-source-settings'
 
 export async function getInputs(): Promise<IGitSourceSettings> {
   const result = ({} as unknown) as IGitSourceSettings
@@ -136,7 +136,7 @@ export async function getInputs(): Promise<IGitSourceSettings> {
   core.debug(`recursive submodules = ${result.nestedSubmodules}`)
 
   // Auth token
-  result.authToken = core.getInput('token', {required: true})
+  result.authToken = core.getInput('token', { required: true })
 
   // SSH
   result.sshKey = core.getInput('ssh-key')
@@ -159,5 +159,6 @@ export async function getInputs(): Promise<IGitSourceSettings> {
   result.githubServerUrl = core.getInput('github-server-url')
   core.debug(`GitHub Host URL = ${result.githubServerUrl}`)
 
+  result.mirror = core.getInput('mirror')
   return result
 }
