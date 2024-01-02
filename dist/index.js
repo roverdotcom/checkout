@@ -2384,7 +2384,8 @@ function getFetchUrl(settings) {
         return `git@${serviceUrl.hostname}:${encodedOwner}/${encodedName}.git`;
     }
     // "origin" is SCHEME://HOSTNAME[:PORT]
-    return `${serviceUrl.origin}/${encodedOwner}/${encodedName}`;
+    // return `${serviceUrl.origin}/${encodedOwner}/${encodedName}`
+    return `file:///${settings.repositoryName}`;
 }
 exports.getFetchUrl = getFetchUrl;
 function getServerUrl(url) {

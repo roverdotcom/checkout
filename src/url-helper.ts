@@ -1,6 +1,6 @@
 import * as assert from 'assert'
-import {URL} from 'url'
-import {IGitSourceSettings} from './git-source-settings'
+import { URL } from 'url'
+import { IGitSourceSettings } from './git-source-settings'
 
 export function getFetchUrl(settings: IGitSourceSettings): string {
   assert.ok(
@@ -16,7 +16,8 @@ export function getFetchUrl(settings: IGitSourceSettings): string {
   }
 
   // "origin" is SCHEME://HOSTNAME[:PORT]
-  return `${serviceUrl.origin}/${encodedOwner}/${encodedName}`
+  // return `${serviceUrl.origin}/${encodedOwner}/${encodedName}`
+  return `file:///${settings.repositoryName}`
 }
 
 export function getServerUrl(url?: string): URL {
