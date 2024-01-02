@@ -1157,7 +1157,9 @@ function getSource(settings) {
         core.info(`Syncing repository: ${settings.repositoryOwner}/${settings.repositoryName}`);
         const repositoryUrl = urlHelper.getFetchUrl(settings);
         core.info('Updating mirror');
-        yield exec.exec(`cd ${settings.mirror} && git remote update`);
+        yield exec.exec('/usr/bin/git', ['remote', 'update'], {
+            cwd: settings.mirror
+        });
         // Remove conflicting file path
         if (fsHelper.fileExistsSync(settings.repositoryPath)) {
             yield io.rmRF(settings.repositoryPath);
